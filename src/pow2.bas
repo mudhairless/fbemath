@@ -32,7 +32,10 @@ function RoundPow2 ( byval ds as double ) as double
 end function
 
 function IsPow2 ( byval n as double ) as boolean
-	return not (n and (n - 1))
+	if (n = 0 ORELSE n = 1) then
+		return false
+	end if
+	return (n and (n - 1)) = 0
 end function
 
 '' single
@@ -66,7 +69,10 @@ function RoundPow2 ( byval ds as single ) as single
 end function
 
 function IsPow2 ( byval n as single ) as boolean
-	return not (n and (n - 1))
+	if (n = 0 ORELSE n = 1) then
+		return false
+	end if
+	return (n and (n - 1)) = 0
 end function
 
 '' integer
@@ -100,7 +106,10 @@ function RoundPow2 ( byval ds as integer ) as integer
 end function
 
 function IsPow2 ( byval n as integer ) as boolean
-	return not (n and (n - 1))
+	if (n = 0 ORELSE n = 1) then
+		return false
+	end if
+	return (n and (n - 1)) = 0
 end function
 
 '' short
@@ -134,7 +143,10 @@ function RoundPow2 ( byval ds as short ) as short
 end function
 
 function IsPow2 ( byval n as short ) as boolean
-	return not (n and (n - 1))
+	if (n = 0 ORELSE n = 1) then
+		return false
+	end if
+	return (n and (n - 1)) = 0
 end function
 
 end namespace

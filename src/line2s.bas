@@ -10,19 +10,19 @@ constructor Line2S ( )
 end constructor
 
 '' :::::
-constructor Line2S (     byval a as Vector2S,             byval b as Vector2S          )
+constructor Line2S ( byval a as Vector2S, byval b as Vector2S )
     this.a = a
     this.b = b
 end constructor
 
 '' :::::
-constructor Line2S (     byref l as const Line2S )
+constructor Line2S ( byref l as const Line2S )
     this.a = l.a
     this.b = l.b
 end constructor
 
 '' :::::
-operator Line2S.let (     byref l as const Line2S )
+operator Line2S.let ( byref l as const Line2S )
     this.a = l.a
     this.b = l.b
 end operator

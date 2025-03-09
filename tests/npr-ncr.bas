@@ -1,46 +1,47 @@
-# include once "ext/tests.bi"
-# include once "ext/math/npr.bi"
-# include once "ext/math/ncr.bi"
+#include once "fbemath/ncr.bi"
+#include once "fbemath/npr.bi"
 
-namespace ext.tests.math
+#macro assert_equal(lhs, rhs)
+if ((rhs) = (lhs)) then
+        print __FUNCTION__ & " " & #lhs & " = " & #rhs & " is working"
+    else 
+        print __FUNCTION__ & " " & #lhs & " = " & #rhs & " is NOT working"
+    end if
+#endmacro
 
-	using ext.math
-	
-	private sub test_npr
-	
-		' 0-size set and/or subset (fail)..
-		ext_assert_EQUAL(0, nPr(0, 0))
-		ext_assert_EQUAL(0, nPr(1, 0))
-		ext_assert_EQUAL(0, nPr(0, 1))
-		
-		' larger subset (fail)..
-		ext_assert_EQUAL(0, nPr(1, 2))
-		
-		' general..
-		ext_assert_EQUAL(311875200, nPr(52, 5))
-		
-	end sub
-	
-	private sub test_ncr
-	
-		' 0-size set and/or subset (fail)..
-		ext_assert_EQUAL(0, nCr(0, 0))
-		ext_assert_EQUAL(0, nCr(1, 0))
-		ext_assert_EQUAL(0, nCr(0, 1))
-		
-		' larger subset (fail)..
-		ext_assert_EQUAL(0, nCr(1, 2))
-		
-		' general..
-		ext_assert_EQUAL(2598960, nCr(52, 5))
-		
-	end sub
-	
-	private sub register constructor
-		ext.tests.addSuite("ext-math-npr/ncr")
-		ext.tests.addTest("test_npr", @test_npr)
-		ext.tests.addTest("test_ncr", @test_ncr)
-	end sub
+using math
 
-end namespace
+sub test_npr
+
+	' 0-size set and/or subset (fail)..
+	assert_equal(0, nPr(0, 0))
+	assert_equal(0, nPr(1, 0))
+	assert_equal(0, nPr(0, 1))
+	
+	' larger subset (fail)..
+	assert_equal(0, nPr(1, 2))
+	
+	' general..
+	assert_equal(311875200, nPr(52, 5))
+	
+end sub
+
+sub test_ncr
+
+	' 0-size set and/or subset (fail)..
+	assert_equal(0, nCr(0, 0))
+	assert_equal(0, nCr(1, 0))
+	assert_equal(0, nCr(0, 1))
+	
+	' larger subset (fail)..
+	assert_equal(0, nCr(1, 2))
+	
+	' general..
+	assert_equal(2598960, nCr(52, 5))
+	
+end sub
+	
+test_npr()
+test_ncr()
+
 

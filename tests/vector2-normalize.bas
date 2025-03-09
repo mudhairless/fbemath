@@ -1,39 +1,42 @@
-# include once "ext/tests.bi"
-# include once "ext/math/vector2.bi"
+#include once "fbemath/vector2/vector2d.bi"
 
-namespace ext.tests.math
+#macro assert_true(lhs)
+	if (true = (lhs)) then
+        print __FUNCTION__ & " " & #lhs & " = true is working"
+    else 
+        print __FUNCTION__ & " " & #lhs & " = true is NOT working"
+		return
+    end if
+#endmacro
 
-    private sub TestSimple
+using math
+
+sub TestSimple
+
+    var a = Vector2D( 100.0, 0.0 )
+    a.Normalize()
     
-        var a = ext.math.fbext_Vector2( ((double)) )( 100.0, 0.0 )
-        a.Normalize()
-        
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( a.x, 1.0 ) )
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( a.y, 0.0 ) )
-        
-        var b = ext.math.fbext_Vector2( ((double)) )( 0.0, 100.0 )
-        b.Normalize()
-        
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( b.x, 0.0 ) )
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( b.y, 1.0 ) )
-        
-        var c = ext.math.fbext_Vector2( ((double)) )( -100.0, 0.0 )
-        c.Normalize()
-        
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( c.x, -1.0 ) )
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( c.y, 0.0 ) )
-        
-        var d = ext.math.fbext_Vector2( ((double)) )( 0.0, -100.0 )
-        d.Normalize()
-        
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( d.x, 0.0 ) )
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( d.y, -1.0 ) )
-        
-    end sub
+    assert_true( FBE_FLOAT_EQUAL( a.x, 1.0 ) )
+    assert_true( FBE_FLOAT_EQUAL( a.y, 0.0 ) )
     
-	private sub register constructor
-		ext.tests.addSuite("ext-math-vector2-normalize")
-		ext.tests.addTest("TestSimple", @TestSimple)
-	end sub
-
-end namespace
+    var b = Vector2D( 0.0, 100.0 )
+    b.Normalize()
+    
+    assert_true( FBE_FLOAT_EQUAL( b.x, 0.0 ) )
+    assert_true( FBE_FLOAT_EQUAL( b.y, 1.0 ) )
+    
+    var c = Vector2D( -100.0, 0.0 )
+    c.Normalize()
+    
+    assert_true( FBE_FLOAT_EQUAL( c.x, -1.0 ) )
+    assert_true( FBE_FLOAT_EQUAL( c.y, 0.0 ) )
+    
+    var d = Vector2D( 0.0, -100.0 )
+    d.Normalize()
+    
+    assert_true( FBE_FLOAT_EQUAL( d.x, 0.0 ) )
+    assert_true( FBE_FLOAT_EQUAL( d.y, -1.0 ) )
+    
+end sub
+    
+TestSimple()

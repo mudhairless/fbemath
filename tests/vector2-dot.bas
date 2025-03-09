@@ -1,22 +1,23 @@
-# include once "ext/tests.bi"
-# include once "ext/math/vector2.bi"
+#include once "fbemath/vector2/vector2d.bi"
 
-namespace ext.tests.math
+#macro assert_true(lhs)
+	if (true = (lhs)) then
+        print __FUNCTION__ & " " & #lhs & " = true is working"
+    else 
+        print __FUNCTION__ & " " & #lhs & " = true is NOT working"
+		return
+    end if
+#endmacro
 
-type Vector as ext.math.fbext_Vector2( ((double)) )
+using math
 
-    private sub Test
+sub Test
+
+    var a = Vector2D( 2.0, 3.0 )
+    var b = Vector2D( 4.0, 5.0 )
     
-        var a = Vector( 2.0, 3.0 )
-        var b = Vector( 4.0, 5.0 )
-        
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( 23.0, a.Dot(b) ) )
-    
-    end sub
-    
-	private sub register constructor
-		ext.tests.addSuite("ext-math-vector2-magnitude")
-		ext.tests.addTest("Test", @Test)
-	end sub
+    assert_true( FBE_FLOAT_EQUAL( 23.0, a.Dot(b) ) )
 
-end namespace
+end sub
+    
+Test()

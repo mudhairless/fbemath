@@ -1,38 +1,38 @@
-# include once "ext/tests.bi"
-# include once "ext/math/vector3.bi"
+#include once "fbemath/vector3/vector3d.bi"
 
-namespace ext.tests.math
+#macro assert_true(lhs)
+	if (true = (lhs)) then
+        print __FUNCTION__ & " " & #lhs & " = true is working"
+    else 
+        print __FUNCTION__ & " " & #lhs & " = true is NOT working"
+		return
+    end if
+#endmacro
 
-type Vector as ext.math.fbext_Vector3( ((double)) )
+using math
 
-var shared origin = Vector( 0.0, 0.0, 0.0 )
+var shared origin = Vector3D( 0.0, 0.0, 0.0 )
 
-# define TEST_DISTANCE_FROM_ORIGIN( v, d ) _
-    ext_assert_TRUE( FBEXT_FLOAT_EQUAL( d, (v).Distance(origin) ) )
+# define TEST_DISTANCE_FROM_ORIGIN( v, d ) assert_TRUE( FBE_FLOAT_EQUAL( d, (v).Distance(origin) ) )
 
-    private sub Test
+private sub Test
+
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( 3.0, 4.0, 0.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( 3.0, -4.0, 0.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( -3.0, 4.0, 0.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( -3.0, -4.0, 0.0 ), 5.0 )
     
-        TEST_DISTANCE_FROM_ORIGIN( Vector( 3.0, 4.0, 0.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( 3.0, -4.0, 0.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( -3.0, 4.0, 0.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( -3.0, -4.0, 0.0 ), 5.0 )
-        
-        TEST_DISTANCE_FROM_ORIGIN( Vector( 3.0, 0.0, 4.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( 3.0, 0.0, -4.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( -3.0, 0.0, 4.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( -3.0, 0.0, -4.0 ), 5.0 )
-        
-        TEST_DISTANCE_FROM_ORIGIN( Vector( 0.0, 3.0, 4.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( 0.0, 3.0, -4.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( 0.0, -3.0, 4.0 ), 5.0 )
-        TEST_DISTANCE_FROM_ORIGIN( Vector( 0.0, -3.0, -4.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( 3.0, 0.0, 4.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( 3.0, 0.0, -4.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( -3.0, 0.0, 4.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( -3.0, 0.0, -4.0 ), 5.0 )
     
-    end sub
-    
-	private sub register constructor
-		ext.tests.addSuite("ext-math-vector3-distance")
-		ext.tests.addTest("Test", @Test)
-	end sub
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( 0.0, 3.0, 4.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( 0.0, 3.0, -4.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( 0.0, -3.0, 4.0 ), 5.0 )
+    TEST_DISTANCE_FROM_ORIGIN( Vector3D( 0.0, -3.0, -4.0 ), 5.0 )
 
-end namespace
+end sub
+    
+Test()
 

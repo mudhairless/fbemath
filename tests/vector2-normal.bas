@@ -1,37 +1,39 @@
-# include once "ext/tests.bi"
-# include once "ext/math/vector2.bi"
+#include once "fbemath/vector2/vector2d.bi"
 
-namespace ext.tests.math
+#macro assert_true(lhs)
+	if (true = (lhs)) then
+        print __FUNCTION__ & " " & #lhs & " = true is working"
+    else 
+        print __FUNCTION__ & " " & #lhs & " = true is NOT working"
+		return
+    end if
+#endmacro
 
-type Vector as ext.math.fbext_Vector2( ((double)) )
+using math
 
-    private sub Test
+sub Test
+
+    var a = Vector2D( 10.0, 0.0 )
+    a.Normalize()
+    assert_true( FBE_FLOAT_EQUAL( 1.0, a.x ) )
+    assert_true( FBE_FLOAT_EQUAL( 0.0, a.y ) )
     
-        var a = Vector( 10.0, 0.0 )
-        a.Normalize()
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( 1.0, a.x ) )
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( 0.0, a.y ) )
-        
-        var b = Vector( 0.0, 10.0 )
-        b.Normalize()
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( 0.0, b.x ) )
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( 1.0, b.y ) )
-        
-        var c = Vector( -10.0, 0.0 )
-        c.Normalize()
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( -1.0, c.x ) )
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( 0.0, c.y ) )
-        
-        var d = Vector( 0.0, -10.0 )
-        d.Normalize()
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( 0.0, d.x ) )
-        ext_assert_TRUE( FBEXT_FLOAT_EQUAL( -1.0, d.y ) )
+    var b = Vector2D( 0.0, 10.0 )
+    b.Normalize()
+    assert_true( FBE_FLOAT_EQUAL( 0.0, b.x ) )
+    assert_true( FBE_FLOAT_EQUAL( 1.0, b.y ) )
     
-    end sub
+    var c = Vector2D( -10.0, 0.0 )
+    c.Normalize()
+    assert_true( FBE_FLOAT_EQUAL( -1.0, c.x ) )
+    assert_true( FBE_FLOAT_EQUAL( 0.0, c.y ) )
     
-	private sub register constructor
-		ext.tests.addSuite("ext-math-vector2-normal")
-		ext.tests.addTest("Test", @Test)
-	end sub
+    var d = Vector2D( 0.0, -10.0 )
+    d.Normalize()
+    assert_true( FBE_FLOAT_EQUAL( 0.0, d.x ) )
+    assert_true( FBE_FLOAT_EQUAL( -1.0, d.y ) )
 
-end namespace
+end sub
+
+Test()
+

@@ -58,29 +58,29 @@
 ::%fbc% -i inc -p lib -w all -g -exx examples/yinyang.bas
 
 @echo Running Tests
-::%fbc% -i inc -p lib -w all -g -exx examples/matrix.bas
-::@tests\matrix.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/npr-ncr.bas
-::@tests\npr-ncr.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/pow2.bas
-::@tests\pow2.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/random.bas
-::@tests\random.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector2-angle.bas
-::@tests\vector2-angle.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector2-distance.bas
-::@tests\vector2-distance.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector2-dot.bas
-::@tests\vector2-dot.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector2-magnitude.bas
-::@tests\vector2-magnitude.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector2-normal.bas
-::@tests\vector2-normal.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector2-normalize.bas
-::@tests\vector2-normalize.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector3-distance.bas
-::@tests\vector3-distance.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector3-dot.bas
-::@tests\vector3-dot.exe
-::%fbc% -i inc -p lib -w all -g -exx examples/vector3-magnitude.bas
-::@tests\vector3-magnitude.exe
+%fbc% -i inc -p lib -w all -g -exx tests/matrix.bas
+@tests\matrix.exe
+%fbc% -i inc -p lib -w all -g -exx tests/npr-ncr.bas
+@tests\npr-ncr.exe
+%fbc% -i inc -p lib -w all -g -exx tests/pow2.bas
+@tests\pow2.exe
+%fbc% -i inc -p lib -w all -g -exx tests/random.bas
+@tests\random.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector2-angle.bas
+@tests\vector2-angle.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector2-distance.bas
+@tests\vector2-distance.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector2-dot.bas
+@tests\vector2-dot.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector2-magnitude.bas
+@tests\vector2-magnitude.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector2-normal.bas
+@tests\vector2-normal.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector2-normalize.bas
+@tests\vector2-normalize.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector3-distance.bas
+@tests\vector3-distance.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector3-dot.bas
+@tests\vector3-dot.exe
+%fbc% -i inc -p lib -w all -g -exx tests/vector3-magnitude.bas
+@tests\vector3-magnitude.exe

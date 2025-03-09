@@ -10,19 +10,19 @@ constructor Line2D ( )
 end constructor
 
 '' :::::
-constructor Line2D (     byval a as Vector2D,             byval b as Vector2D          )
+constructor Line2D ( byval a as Vector2D, byval b as Vector2D )
     this.a = a
     this.b = b
 end constructor
 
 '' :::::
-constructor Line2D (     byref l as const Line2D )
+constructor Line2D ( byref l as const Line2D )
     this.a = l.a
     this.b = l.b
 end constructor
 
 '' :::::
-operator Line2D.let (     byref l as const Line2D )
+operator Line2D.let ( byref l as const Line2D )
     this.a = l.a
     this.b = l.b
 end operator

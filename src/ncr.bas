@@ -1,3 +1,5 @@
+namespace math
+
 function nCr (byval n as ulongint, byval r as ulongint) as ulongint
 	
 	if (n = 0) or (r = 0) then return 0
@@ -14,3 +16,5 @@ function nCr (byval n as ulongint, byval r as ulongint) as ulongint
 	return result / k
 
 end function
+
+end namespace
