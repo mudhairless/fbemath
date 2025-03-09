@@ -2,7 +2,7 @@
 ' either attracted or repelled by the mouse cursor. The strength of the force
 ' applied is controlled by the mouse-wheel.
 
-# include once "ext/math/vector2.bi"
+# include once "fbemath/vector2/vector2d.bi"
 # include once "fbgfx.bi" ' for multikey scancodes
 
 # define CLAMP( n_, low_, high_) _
@@ -10,7 +10,7 @@
     iif( (high_) < (n_), (high_), _
          (n_)))
 
-type Vector as ext.math.fbext_Vector2( ((double)) )
+type Vector as math.Vector2D
 
 const hScreenSize as uinteger = 800
 const vScreenSize as uinteger = 600

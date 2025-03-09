@@ -1,7 +1,8 @@
-# include once "ext/math.bi"
+# include once "fbemath/vector3/vector3f.bi"
+# include once "fbemath/vector4/vector4f.bi"
 
-dim as ext.math.vec4f my4
-dim as ext.math.vec3f my3
+dim as math.Vector4F my4
+dim as math.Vector3F my3
 
 
 my4.x = 1

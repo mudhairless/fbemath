@@ -7,11 +7,10 @@
 ''accompanying file LICENSE.txt or copy at
 ''https://github.com/FreeBASIC-Extended-Library/fb-ext-lib/blob/master/COPYING)
 
-# include once "ext/graphics.bi"
-# include once "ext/math/matrix.bi"
+# include once "fbemath/matrix/matrixf.bi"
 # include once "fbgfx.bi"
 
-using ext.math
+using math
 randomize timer
 
 type line_struct
@@ -21,8 +20,8 @@ end type
 type obj_struct
     max_vertices    as integer 'the number of vertices in our model
     max_lines       as integer 'the number of lines in our model
-    vertices        as vec2f ptr 'the vertex array
-    tvertices       as vec2f ptr 'secondary array for transformed vertices
+    vertices        as Vector2F ptr 'the vertex array
+    tvertices       as Vector2F ptr 'secondary array for transformed vertices
     lines           as line_struct ptr 'used to store indexed vertices
 end type
 
@@ -36,15 +35,15 @@ dim as obj_struct obj 'create our initial 2d object
 
 read obj.max_vertices 'we're storing our object with data statements,
                       'so we read the number of vertices first.
-obj.vertices  = new vec2f[obj.max_vertices]
-obj.tvertices = new vec2f[obj.max_vertices]
+obj.vertices  = new Vector2F[obj.max_vertices]
+obj.tvertices = new Vector2F[obj.max_vertices]
 
 'our object is a little small, so we need to scale it up a bit.
 'this demonstrates how to scale the object using an ext.matrix
 'a value of 1 will actually do nothing, 100% scale, in otherwords
 '1.5 will scale it up by 150%,
 '2 will scale by 200%, etc...
-dim as matrix init_matrix
+dim as matrixf init_matrix
 init_matrix.LoadIdentity
 init_matrix.Scale(1.5)
 
@@ -53,7 +52,7 @@ for i as integer = 0 to obj.max_vertices-1
     read tx, ty' now we actually read that vertex data
 
     'now to multiply the vertex with the init matrix and store it in our model's "vertices" array
-    obj.vertices[i] = vec2f(tx,ty) * init_matrix
+    obj.vertices[i] = Vector2F(tx,ty) * init_matrix
 next
 
 
@@ -71,10 +70,10 @@ for i as integer = 0 to obj.max_lines-1
     obj.lines[i].index(2) = p2-1
 next
 
-dim as integer angle, mousex, mousey, button
-dim as vec2f position = vec2f(320, 240)'the position vector for the ship
-dim as vec3f velocity'the velocity(direction) vector of the ship
-dim as single thrust'this is just a scalar that we will use to scale the speed of the ship
+dim as integer mousex, mousey, button
+dim as Vector2F position = Vector2F(320, 240)'the position vector for the ship
+dim as Vector3F velocity'the velocity(direction) vector of the ship
+dim as single thrust, angle'this is just a scalar that we will use to scale the speed of the ship
 
 do
     'this section just takes the current position of the mouse and
@@ -86,7 +85,7 @@ do
     'this section creates a matrix for our ship,
     'initializes it to identity, which you can think of as a matrix with 0 position,
     '0 rotation and a scale of 1.0.
-    dim as matrix ship_matrix
+    dim as matrixf ship_matrix
     ship_matrix.LoadIdentity
 
     'now we're translating the matrix to the ship's position,
@@ -112,7 +111,7 @@ do
     'and add it to the ship's position
     'not a realistic simulation, but it works for this demo ;)
     var __tempv3f = velocity*thrust
-    position+= vec2f(__tempv3f.x,__tempv3f.y)
+    position+= Vector2F(__tempv3f.x,__tempv3f.y)
 
 
     'transform the vertices using ship_matrix
@@ -133,8 +132,8 @@ do
     'we're just using that to draw the lines
     'this method doesn't require us to do any calculations within the drawing loop
     for l as integer = 0 to obj.max_lines-1
-        dim as vec2f p1 = obj.tvertices[ obj.lines[l].index(1) ]
-        dim as vec2f p2 = obj.tvertices[ obj.lines[l].index(2) ]
+        dim as Vector2F p1 = obj.tvertices[ obj.lines[l].index(1) ]
+        dim as Vector2F p2 = obj.tvertices[ obj.lines[l].index(2) ]
         line(p1.x, p1.y)-(p2.x, p2.y), rgb(128,128,128)
     next
 

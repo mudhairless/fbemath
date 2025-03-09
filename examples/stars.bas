@@ -7,14 +7,12 @@
 ''accompanying file LICENSE.txt or copy at
 ''https://github.com/FreeBASIC-Extended-Library/fb-ext-lib/blob/master/COPYING)
 
-#include once "ext/graphics.bi"
-#include once "ext/math.bi"
+#include once "fbemath/vector3/vector3f.bi"
+#include once "fbemath/matrix/matrixf.bi"
 #include once "crt/stdlib.bi"
 #include once "fbgfx.bi"
 
-
-
-using ext.math
+using math
 
 Const as integer SCR_W = 640
 Const as integer SCR_H = 480
@@ -26,45 +24,45 @@ screenres SCR_W,SCR_H,32
 
 
 Function vertex_sort Cdecl ( Byval elm1 As const Any Ptr, Byval elm2 As const Any Ptr ) As long
-    Return Sgn( (Cptr(vec3f Ptr, elm2)->z) - (Cptr(vec3f Ptr, elm1)->z) )
+    Return Sgn( (Cptr(Vector3F Ptr, elm2)->z) - (Cptr(Vector3F Ptr, elm1)->z) )
 End Function
 
-dim as vec3f vert(5000), tvert( ubound(vert) )
+dim as Vector3F vert(5000), tvert( ubound(vert) )
  
 'set up some test vertices
 for i as integer = lbound(vert) to ubound(vert)
-    vert(i) = type<vec3f>(-1000+rnd*2000,-1000+rnd*2000,-1000+rnd*2000)
+    vert(i) = type<Vector3F>(-1000+rnd*2000,-1000+rnd*2000,-1000+rnd*2000)
     vert(i)*=1.45
 next
 
-    dim as vec3f posit, look
-    dim as vec3f tposit
-    dim as vec3f tlook 
-    dim as vec3f up = vec3f(0,1,0) 
+    dim as Vector3F posit, look
+    dim as Vector3F tposit
+    dim as Vector3F tlook 
+    dim as Vector3F up = Vector3F(0,1,0) 
  
 do
     if tposit.distance(posit)<100 then
-        tposit = type<vec3f>(-1000+rnd*2000,-1000+rnd*2000,-1000+rnd*2000)
-        tlook = type<vec3f>(-1000+rnd*2000,-1000+rnd*2000,-1000+rnd*2000)
+        tposit = type<Vector3F>(-1000+rnd*2000,-1000+rnd*2000,-1000+rnd*2000)
+        tlook = type<Vector3F>(-1000+rnd*2000,-1000+rnd*2000,-1000+rnd*2000)
     end if
     
     posit += (tposit-posit)/50.0
     look  += (tlook-look)/50.0
     
-    dim as matrix m, m2
+    dim as matrixf m, m2
     m.LookAt( posit, look, up ) 
     
     for i as integer = lbound(vert) to ubound(vert)
         tvert(i) = vert(i)*m
     next
         
-    'ext.quicksort( @tvert(0), ubound(tvert), SizeOf(vec3f), @vertex_sort )
-    qsort( @tvert(0), ubound(tvert), sizeof(vec3f), @vertex_sort )
+    'ext.quicksort( @tvert(0), ubound(tvert), SizeOf(Vector3F), @vertex_sort )
+    qsort( @tvert(0), ubound(tvert), sizeof(Vector3F), @vertex_sort )
 
     screenlock
     line(0,0)-(SCR_W-1,SCR_H-1), 0, BF
     for i as integer = lbound(vert) to ubound(vert)
-        dim as vec3f pnt = tvert(i)
+        dim as Vector3F pnt = tvert(i)
         dim as single dist = pnt.z
         if dist > 0 then
             dim as single size = 20 - dist/80

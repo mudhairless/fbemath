@@ -1,14 +1,16 @@
 ' Demonstrates checking for line segment intersection by sweeping a line
 ' around the center of the screen amidst a circular perimeter of lines.
 
-# include once "ext/math/vector2.bi"
-# include once "ext/math/line2.bi"
-# include once "ext/math/intersects.bi"
+# include once "fbemath/vector2/vector2d.bi"
+# include once "fbemath/line2/line2d.bi"
+# include once "fbemath/intersects.bi"
 # include once "fbgfx.bi" ' for MultiKey constants
 
+using math
+
 ' some type aliases to lighten the load.
-type Vector as ext.math.fbext_Vector2( ((double)) )
-type LineType as ext.math.fbext_Line2( ((double)) )
+type Vector as Vector2D
+type LineType as Line2D
 
 ' builds an array of count number of perimeter lines in a circle, starting at
 ' index 1.
@@ -40,7 +42,7 @@ do
     for i as integer = 1 to ubound(lines)
         var lineColor = normalColor
        
-        if ext.math.Intersects( lines(i), sweep, sweep.b ) then
+        if Intersects( lines(i), sweep, sweep.b ) then
             lineColor = intersectedColor
         end if
        
@@ -70,7 +72,7 @@ sub SetupLines ( lines() as LineType, byval count as uinteger )
     
     redim lines( 1 to count ) as LineType
     
-    var angleStep = ext.math.pi2 / count
+    var angleStep = pi2 / count
     var angle = 0.0
     
     GetVertex( angle, lines(1).a )

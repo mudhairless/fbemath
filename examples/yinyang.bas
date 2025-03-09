@@ -4,21 +4,23 @@
 ' the white hemicircle. This is an analogy of the north and south poles of a
 ' magnet.
 
-# include once "ext/math/vector2.bi"
-# include once "ext/math/line2.bi"
-# include once "ext/math/reflections.bi"
+# include once "fbemath/vector2/vector2d.bi"
+# include once "fbemath/line2/line2d.bi"
+# include once "fbemath/reflections.bi"
 # include once "fbgfx.bi" ' for MultiKey scan codes
 
-type Vector as ext.math.fbext_Vector2( ((double)) )
-type LineType as ext.math.fbext_Line2( ((double)) )
+using math
+
+type Vector as Vector2D
+type LineType as Line2D
 
 type Particle
     position as Vector
     velocity as Vector
-    isWhite as ext.bool
+    isWhite as boolean
     
-    isDead as ext.bool
-    isAbsorbing as ext.bool
+    isDead as boolean
+    isAbsorbing as boolean
 end type
 
 declare sub CheckForCollisionWithScreenEdge ( byref p as Particle )
@@ -79,17 +81,17 @@ do
     var YYMRight = Vector( YYM.y, -YYM.x )
     
     var theta = atan2( YYMRight.y, YYMRight.x )
-    if theta < 0 then theta = ext.math.pi2 + theta
+    if theta < 0 then theta = math.pi2 + theta
     
     YYMRight.Normalize()
     circle ( yinYang.Position.x, yinYang.Position.y ), yinYangRadius, RGB( 255, 255, 255 )
     
     var blackArcPosition = yinYang.Position + YYMRight * yinYangRadius/2.0
-    circle ( blackArcPosition.x, blackArcPosition.y ), yinYangRadius/2.0, RGB( 255, 255, 255 ), theta, theta + ext.math.pi
+    circle ( blackArcPosition.x, blackArcPosition.y ), yinYangRadius/2.0, RGB( 255, 255, 255 ), theta, theta + math.pi
     circle ( blackArcPosition.x, blackArcPosition.y ), yinYangRadius/8.0, RGB( 255, 255, 255 ),,,,F
     
     var whiteArcPosition = yinYang.Position + -YYMRight * yinYangRadius/2.0
-    circle ( whiteArcPosition.x, whiteArcPosition.y ), yinYangRadius/2.0, RGB( 255, 255, 255 ), theta + ext.math.pi, theta + ext.math.pi2
+    circle ( whiteArcPosition.x, whiteArcPosition.y ), yinYangRadius/2.0, RGB( 255, 255, 255 ), theta + math.pi, theta + math.pi2
     circle ( whiteArcPosition.x, whiteArcPosition.y ), yinYangRadius/8.0, RGB( 255, 255, 255 )
     
     var paintPosition = yinYang.Position + -YYMRight * yinYangRadius/16.0
@@ -111,12 +113,12 @@ do
         var angle = acos( YYP.Normal().Dot( YYM.Normal() ) )
         
         ' facing the black hemicircle ? attract particles.
-        if angle >= ext.math.pi_2 then
-            angle -= ext.math.pi_2
-            force *= -( angle / ext.math.pi_2 )
+        if angle >= math.pi_2 then
+            angle -= math.pi_2
+            force *= -( angle / math.pi_2 )
         ' facing the white hemicircle; repel particles.
         else
-            force *= 1 - angle / ext.math.pi_2
+            force *= 1 - angle / math.pi_2
         end if
         
         ' adjust velocity for yinyang force, and move particle.
@@ -133,7 +135,7 @@ do
             var YYPNormal = YYP.Normal()
             var tangent = Vector( YYPNormal.y, -YYPNormal.x )
             *position = yinYang.position + YYPNormal * ( particleRadius + yinYangRadius )
-            *velocity = ext.math.GetReflectedVector( *velocity, tangent ) * 0.80
+            *velocity = math.GetReflectedVector( *velocity, tangent ) * 0.80
         end if
         
         if isWhite then
@@ -154,7 +156,7 @@ loop until multikey( fb.SC_ESCAPE )
 '' :::::
 sub CheckForCollisionWithScreenEdge ( byref p as Particle )
 
-    using ext.math
+    using math
     
     ' left side of screen ?
     if p.position.x - particleRadius < 0 then

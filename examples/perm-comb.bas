@@ -7,10 +7,11 @@
 ''accompanying file LICENSE.txt or copy at
 ''https://github.com/FreeBASIC-Extended-Library/fb-ext-lib/blob/master/COPYING)
 
-# include once "ext/math.bi"
+# include once "fbemath/ncr.bi"
+#include once "fbemath/npr.bi"
 
 
-using ext.math
+using math
 
 print "number of 5-card poker hands = " & nPr(52, 5)
 print "number of unique 5-card poker hands = " & nCr(52, 5)

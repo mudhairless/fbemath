@@ -1,12 +1,14 @@
 ' Demonstrates drawing perpendicular lines using projections.
 
-# include once "ext/math/line2.bi"
-# include once "ext/math/projections.bi"
+# include once "fbemath/line2.bi"
+# include once "fbemath/projections.bi"
 # include once "fbgfx.bi" ' for MultiKey constants
 
+using math
+
 ' some type aliases to lighten the load.
-type Vector as ext.math.fbext_Vector2( ((double)) )
-type LineType as ext.math.fbext_Line2( ((double)) )
+type Vector as Vector2D
+type LineType as Line2D
 
 ' these lines surround the circle.
 dim lines( 1 to 11 ) as LineType = { _
@@ -50,8 +52,8 @@ do
         var AB = (lines(i).b - lines(i).a).Normal()
         var perpendicular = Vector( AB.y, -AB.x )
         
-        var projectedPoint = ext.math.ClampProjectedPoint( lines(i), position )
-        var distanceFromLine = ext.math.Distance( position, projectedPoint )
+        var projectedPoint = ClampProjectedPoint( lines(i), position )
+        var distanceFromLine = Distance( position, projectedPoint )
         
         ' adjust position so that circle stays within the lines.
         if distanceFromLine < radius then

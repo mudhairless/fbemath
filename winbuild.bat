@@ -44,19 +44,6 @@
 @echo Building Libraries
 %fbc% -lib src/factorial.o src/intersectsd.o src/intersectsf.o src/intersectsi.o src/intersectss.o src/line2d.o src/line2f.o src/line2i.o src/line2s.o src/matrixd.o src/matrixf.o src/matrixi.o src/matrixs.o src/ncr.o src/npr.o src/pow2.o src/projections.o src/random.o src/reflections.o src/vector2d.o src/vector3d.o src/vector4d.o src/vector2f.o src/vector3f.o src/vector4f.o src/vector2i.o src/vector3i.o src/vector4i.o src/vector2s.o src/vector3s.o src/vector4s.o -x lib/libfbemath.a
 
-::@echo Building Examples
-::%fbc% -i inc -p lib -w all -g -exx examples/2drotate.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/3drotate.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/line-intersect.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/perm-comb.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/perpendicular-lines.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/PointAt.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/sphere-line-collision.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/stars.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/vector-field.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/vectors.bas
-::%fbc% -i inc -p lib -w all -g -exx examples/yinyang.bas
-
 @echo Running Tests
 %fbc% -i inc -p lib -w all -g -exx tests/matrix.bas
 @tests\matrix.exe
@@ -84,3 +71,17 @@
 @tests\vector3-dot.exe
 %fbc% -i inc -p lib -w all -g -exx tests/vector3-magnitude.bas
 @tests\vector3-magnitude.exe
+
+@echo Building Examples
+%fbc% -i inc -p lib -w all -g -exx examples/2drotate.bas
+%fbc% -i inc -p lib -w all -g -exx examples/3drotate.bas
+%fbc% -i inc -p lib -w all -g -exx examples/line-intersect.bas
+%fbc% -i inc -p lib -w all -g -exx examples/perm-comb.bas
+%fbc% -i inc -p lib -w all -g -exx examples/perpendicular-lines.bas
+%fbc% -i inc -p lib -w all -g -exx examples/PointAt.bas
+%fbc% -i inc -p lib -w all -g -exx examples/sphere-line-collision.bas
+%fbc% -i inc -p lib -w all -g -exx examples/stars.bas
+%fbc% -i inc -p lib -w all -g -exx examples/vector-field.bas
+%fbc% -i inc -p lib -w all -g -exx examples/vectors.bas
+%fbc% -i inc -p lib -w all -g -exx examples/yinyang.bas
+

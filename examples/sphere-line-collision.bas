@@ -8,21 +8,21 @@
 ''accompanying file LICENSE.txt or copy at
 ''https://github.com/FreeBASIC-Extended-Library/fb-ext-lib/blob/master/COPYING)
 
-# include once "ext/math.bi"
+# include once "fbemath/vector2/vector2f.bi"
 # include once "fbgfx.bi"
 
-using ext.math
+using math
 
-declare function cPointline( byref vA as vec2f, byref vB as vec2f, byref vPoint as vec2f ) as vec2f 
+declare function cPointline( byref vA as Vector2F, byref vB as Vector2F, byref vPoint as Vector2F ) as Vector2F 
 
 screenres 640,480,8,,FB.GFX_HIGH_PRIORITY
 
 dim as integer num_verts
 dim as single radius = 30, tDist, mSpeed = 50
 dim as double tTimer, fTime
-dim as vec2f Lines()
-var pl = vec2f(320,240)
-dim as vec2f pld, cent, ero
+dim as Vector2F Lines()
+var pl = Vector2F(320,240)
+dim as Vector2F pld, cent, ero
 
 read Num_Verts 
 redim Lines(num_verts)
@@ -87,11 +87,11 @@ do
 loop until multikey(FB.SC_ESCAPE)
 
 
-function cPointline( byref vA as vec2f, byref vB as vec2f, byref vPoint as vec2f ) as vec2f 
+function cPointline( byref vA as Vector2F, byref vB as Vector2F, byref vPoint as Vector2F ) as Vector2F 
     
-    dim as vec2f tVector1
-    dim as vec2f tVector2
-    dim as vec2f vReturn
+    dim as Vector2F tVector1
+    dim as Vector2F tVector2
+    dim as Vector2F vReturn
     dim as single d
     dim as single t
     
