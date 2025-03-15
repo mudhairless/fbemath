@@ -152,8 +152,9 @@ end operator
 '' :::::
 operator * ( byref lhs as Vector2D, byref rhs as matrixD ) as Vector2D
 
-    return type<Vector2D>( lhs.x*rhs.getarraydata[0] + lhs.y*rhs.getarraydata[4] + rhs.getarraydata[12], _
-    lhs.x*rhs.getarraydata[1] + lhs.y*rhs.getarraydata[5] + rhs.getarraydata[13] )
+    var rhsdata = rhs.getarraydata
+    return type<Vector2D>( lhs.x*rhsdata[0] + lhs.y*rhsdata[4] + rhsdata[12], _
+    lhs.x*rhsdata[1] + lhs.y*rhsdata[5] + rhsdata[13] )
 
 
 end operator
@@ -161,18 +162,20 @@ end operator
 '' :::::
 operator * ( byref lhs as Vector3D, byref rhs as matrixD ) as Vector3D
 
-    return type<Vector3D>( lhs.x*rhs.getarraydata[0] + lhs.y*rhs.getarraydata[4] + lhs.z*rhs.getarraydata[8]  + rhs.getarraydata[12], _
-    lhs.x*rhs.getarraydata[1] + lhs.Y*rhs.getarraydata[5] + lhs.Z*rhs.getarraydata[9]  + rhs.getarraydata[13], _
-    lhs.x*rhs.getarraydata[2] + lhs.Y*rhs.getarraydata[6] + lhs.Z*rhs.getarraydata[10] + rhs.getarraydata[14] )
+    var rhsdata = rhs.getarraydata
+    return type<Vector3D>( lhs.x*rhsdata[0] + lhs.y*rhsdata[4] + lhs.z*rhsdata[8]  + rhsdata[12], _
+    lhs.x*rhsdata[1] + lhs.Y*rhsdata[5] + lhs.Z*rhsdata[9]  + rhsdata[13], _
+    lhs.x*rhsdata[2] + lhs.Y*rhsdata[6] + lhs.Z*rhsdata[10] + rhsdata[14] )
 
 end operator
 
 '' :::::
 operator * ( byref lhs as Vector4D, byref rhs as matrixD ) as Vector4D
 
-    return type<Vector4D>( lhs.x*rhs.getarraydata[0] + lhs.y*rhs.getarraydata[4] + lhs.z*rhs.getarraydata[8]  + rhs.getarraydata[12], _
-    lhs.x*rhs.getarraydata[1] + lhs.Y*rhs.getarraydata[5] + lhs.Z*rhs.getarraydata[9]  + rhs.getarraydata[13], _
-    lhs.x*rhs.getarraydata[2] + lhs.Y*rhs.getarraydata[6] + lhs.Z*rhs.getarraydata[10] + rhs.getarraydata[14], lhs.w  )
+    var rhsdata = rhs.getarraydata
+    return type<Vector4D>( lhs.x*rhsdata[0] + lhs.y*rhsdata[4] + lhs.z*rhsdata[8]  + rhsdata[12], _
+    lhs.x*rhsdata[1] + lhs.Y*rhsdata[5] + lhs.Z*rhsdata[9]  + rhsdata[13], _
+    lhs.x*rhsdata[2] + lhs.Y*rhsdata[6] + lhs.Z*rhsdata[10] + rhsdata[14], lhs.w  )
 
 end operator
 

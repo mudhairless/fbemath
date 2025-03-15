@@ -12,3 +12,6 @@
 NULL
 *.log
 *.tst
+gmon.out
+buildreport.txt
+profile.txt
